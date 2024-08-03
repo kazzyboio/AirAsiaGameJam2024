@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
             if (sceneChanger != null)
             {
                 sceneChanger.ChangeScene("GameScene");
+                FindObjectOfType<SoundManager>().Play("MenuTap");
             }
         }
     }

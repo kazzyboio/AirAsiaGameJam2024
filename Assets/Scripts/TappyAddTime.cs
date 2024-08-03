@@ -6,7 +6,7 @@ using UnityEngine.U2D;
 public class TappyAddTime : MonoBehaviour
 {
     public Timer timer;
-    public float increaseAmount = 5f;
+    public float increaseAmount;
     public int despawnTime = 4; 
 
     private Vector2 startTouchPosition;
