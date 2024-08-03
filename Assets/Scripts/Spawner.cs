@@ -35,6 +35,8 @@ public class Spawner : MonoBehaviour
     {
         StartCoroutine(StartSpawning());
         StartCoroutine(StartSpawning());
+        StartCoroutine(StartSpawning());
+        StartCoroutine(SpawningAmp());
     }
 
     private void Update()
@@ -82,6 +84,21 @@ public class Spawner : MonoBehaviour
         }
 
         return plantToSpawn;
+    }
+
+
+    private IEnumerator SpawningAmp()
+    {
+        yield return new WaitForSeconds(10f);
+        StartCoroutine(StartSpawning());
+        StartCoroutine(SpawningAmper());
+    }
+
+    private IEnumerator SpawningAmper()
+    {
+        yield return new WaitForSeconds(10f);
+        StartCoroutine(StartSpawning());
+        StartCoroutine(StartSpawning());
     }
 
     private IEnumerator StartSpawning()
