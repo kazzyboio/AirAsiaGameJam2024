@@ -1,23 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.GraphicRaycaster;
 
-public class ObjectTapped : MonoBehaviour
+public class TappyAddTime : MonoBehaviour
 {
-    //private Spawner spawner;
-    //private Transform spawnPoint;
+    public Timer timer; 
+    public float increaseAmount = 5f; 
 
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private bool stopTouch = false;
     private float swipeRange = 150.0f;
-
-    //public void Initialize(Spawner spawner, Transform spawnPoint)
-    //{
-    //    this.spawner = spawner;
-    //    this.spawnPoint = spawnPoint;
-    //}
 
     void Update()
     {
@@ -44,17 +37,16 @@ public class ObjectTapped : MonoBehaviour
                 if (!stopTouch)
                 {
                     if (distance.y > swipeRange)
-                    {
+                    {                    
                         Vector2 touchWorldPosition = Camera.main.ScreenToWorldPoint(startTouchPosition);
                         RaycastHit2D hit = Physics2D.Raycast(touchWorldPosition, Vector2.zero);
 
                         if (hit.collider != null && hit.collider.transform == transform)
                         {
-                            // Destroy the game object this script is attached to
-                            //Destroy(gameObject);
-                            //spawner.ObjectDestroyed(spawnPoint);
-                            gameObject.GetComponent<PlantGrowing>().HarvestPlant();
+                            IncreaseTimer();
                             stopTouch = true;
+                            Destroy(gameObject);
+
                         }
                     }
                 }
@@ -87,8 +79,9 @@ public class ObjectTapped : MonoBehaviour
 
                     if (hit.collider != null && hit.collider.transform == transform)
                     {
-                        gameObject.GetComponent<PlantGrowing>().HarvestPlant();
+                        IncreaseTimer();
                         stopTouch = true;
+                        Destroy(gameObject);
                     }
                 }
             }
@@ -100,4 +93,10 @@ public class ObjectTapped : MonoBehaviour
             startTouchPosition = currentTouchPosition = Vector2.zero;
         }
     }
+
+    void IncreaseTimer()
+    {
+        timer.timeRemaining = Mathf.Min(timer.timeRemaining + increaseAmount, 30f);
+    }
 }
+
