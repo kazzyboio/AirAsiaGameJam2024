@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7970964362704086624}
   - component: {fileID: 7690934341666933450}
   - component: {fileID: 5020911146230890115}
+  - component: {fileID: 4094651866159227404}
   - component: {fileID: 7883112135547916831}
   m_Layer: 0
   m_Name: Plant
@@ -98,7 +99,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f5a77731d0a014ab22782371d68b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
+--- !u!114 &4094651866159227404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2826613768511676058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6279e9ef33d73a0458fe7fa9d1705b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  givenScore: 0
+  currentStage: 
+  sproutTime: 1
+  bloomTime: 2
+  wiltTime: 1
+  sproutScore: 100
+  bloomedScore: 300
+  wiltedScore: 100
 --- !u!61 &7883112135547916831
 BoxCollider2D:
   m_ObjectHideFlags: 0

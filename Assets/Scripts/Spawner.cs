@@ -4,37 +4,73 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public Transform[] spawnPoints;
     public GameObject objectToSpawn;
-    public float respawnDelay = 2f;
+    public float minSpawnDelay = 1.5f, maxSpawnDelay = 2.5f;
 
+    [SerializeField]
+    private List<Transform> spawnPoints = new List<Transform>();
+    private float spawnDelay = 1.5f;
+
+    private void Awake()
+    {
+        foreach (Transform t in GetComponentsInChildren<Transform>())
+        { 
+            spawnPoints.Add(t);
+        }
+
+        spawnPoints.Remove(transform);
+    }
 
     void Start()
     {
-        foreach (Transform spawnPoint in spawnPoints)
+        StartCoroutine(StartSpawning());
+    }
+
+    private IEnumerator StartSpawning()
+    {
+        spawnDelay = Random.Range(minSpawnDelay, maxSpawnDelay);
+        yield return new WaitForSeconds(spawnDelay);
+
+        bool full = false;
+
+        for (int i = 0; i < spawnPoints.Count; i++)
         {
-            SpawnObjectAt(spawnPoint);
+            if (spawnPoints[i].childCount < 1)
+            {
+                break;
+            }
+
+            if (i == spawnPoints.Count - 1)
+            {
+                full = true;
+            }
         }
-    }
 
-    public void ObjectDestroyed(Transform spawnPoint)
-    {
-        StartCoroutine(RespawnAfterDelay(spawnPoint));
-    }
+        bool spawned = false;
+        int indexToSpawn = 0;
 
-    private IEnumerator RespawnAfterDelay(Transform spawnPoint)
-    {
-        yield return new WaitForSeconds(respawnDelay);
-        SpawnObjectAt(spawnPoint);
+        while (!spawned && !full)
+        {
+            int ran = Random.Range(0, spawnPoints.Count);
+
+            if (spawnPoints[ran].childCount < 1)
+            { 
+                spawned = true;
+                indexToSpawn = ran;
+            }
+        }
+
+        if (!full)
+        {
+            SpawnObjectAt(spawnPoints[indexToSpawn]);
+        }
+
+        StartCoroutine(StartSpawning());
     }
 
     private void SpawnObjectAt(Transform spawnPoint)
     {
         GameObject obj = Instantiate(objectToSpawn, spawnPoint.position, spawnPoint.rotation);
-        ObjectTapped tapToDisappear = obj.GetComponent<ObjectTapped>();
-        if (tapToDisappear != null)
-        {
-            tapToDisappear.Initialize(this, spawnPoint);
-        }
+        obj.transform.parent = spawnPoint.transform;
     }
 }

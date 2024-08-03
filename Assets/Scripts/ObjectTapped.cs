@@ -5,19 +5,19 @@ using static UnityEngine.UI.GraphicRaycaster;
 
 public class ObjectTapped : MonoBehaviour
 {
-    private Spawner spawner;
-    private Transform spawnPoint;
+    //private Spawner spawner;
+    //private Transform spawnPoint;
 
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private bool stopTouch = false;
     private float swipeRange = 150.0f;
 
-    public void Initialize(Spawner spawner, Transform spawnPoint)
-    {
-        this.spawner = spawner;
-        this.spawnPoint = spawnPoint;
-    }
+    //public void Initialize(Spawner spawner, Transform spawnPoint)
+    //{
+    //    this.spawner = spawner;
+    //    this.spawnPoint = spawnPoint;
+    //}
 
     void Update()
     {
@@ -51,8 +51,9 @@ public class ObjectTapped : MonoBehaviour
                         if (hit.collider != null && hit.collider.transform == transform)
                         {
                             // Destroy the game object this script is attached to
-                            Destroy(gameObject);
-                            spawner.ObjectDestroyed(spawnPoint);
+                            //Destroy(gameObject);
+                            //spawner.ObjectDestroyed(spawnPoint);
+                            gameObject.GetComponent<PlantGrowing>().HarvestPlant();
                             stopTouch = true;
                         }
                     }
@@ -86,8 +87,7 @@ public class ObjectTapped : MonoBehaviour
 
                     if (hit.collider != null && hit.collider.transform == transform)
                     {
-                        Destroy(gameObject);
-                        spawner.ObjectDestroyed(spawnPoint);
+                        gameObject.GetComponent<PlantGrowing>().HarvestPlant();
                         stopTouch = true;
                     }
                 }
