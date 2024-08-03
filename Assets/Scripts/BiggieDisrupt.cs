@@ -5,19 +5,14 @@ using UnityEngine.UI;
 
 public class BiggieDisrupt : MonoBehaviour
 {
-    public GameObject screenDisrupt; 
+    //public GameObject screenDisrupt; 
     public float blockDuration = 2.0f; 
-    public float fadeDuration = 1.0f;
+    //public float fadeDuration = 1.0f;
  
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private bool stopTouch = false;
     private float swipeRange = 150.0f;
-
-    private void Start()
-    {
-        screenDisrupt.SetActive(false);
-    }
 
     void Update()
     {
@@ -50,7 +45,8 @@ public class BiggieDisrupt : MonoBehaviour
 
                         if (hit.collider != null && hit.collider.transform == transform)
                         {
-                            StartCoroutine(DisruptScreen());
+                            ScreenDisrupter.Instance.ShowDisruptScreen(blockDuration);
+                            Destroy(gameObject);
                             stopTouch = true;
                         }
                     }
@@ -84,7 +80,8 @@ public class BiggieDisrupt : MonoBehaviour
 
                     if (hit.collider != null && hit.collider.transform == transform)
                     {
-                        StartCoroutine(DisruptScreen());
+                        ScreenDisrupter.Instance.ShowDisruptScreen(blockDuration);
+                        Destroy(gameObject);
                         stopTouch = true;
                     }
                 }
@@ -96,39 +93,5 @@ public class BiggieDisrupt : MonoBehaviour
             stopTouch = false;
             startTouchPosition = currentTouchPosition = Vector2.zero;
         }
-    }
-
-    private IEnumerator DisruptScreen()
-    {
-        screenDisrupt.SetActive(true);
-        Image image = screenDisrupt.GetComponent<Image>();
-
-        if (image != null)
-        {
-            Color color = image.color;
-            color.a = 1f; 
-            image.color = color;
-        }
-
-        yield return new WaitForSeconds(blockDuration); 
-
-        if (image != null)
-        {
-            float elapsedTime = 0f;
-            while (elapsedTime < fadeDuration)
-            {
-                elapsedTime += Time.deltaTime;
-                Color color = image.color;
-                color.a = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration); 
-                image.color = color; 
-                yield return null; 
-            }
-
-            Color finalColor = image.color;
-            finalColor.a = 0f;
-            image.color = finalColor;
-        }
-
-        screenDisrupt.SetActive(false);
     }
 }
