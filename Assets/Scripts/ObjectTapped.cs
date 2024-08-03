@@ -11,7 +11,7 @@ public class ObjectTapped : MonoBehaviour
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private bool stopTouch = false;
-    private float swipeRange = 300.0f;
+    private float swipeRange = 150.0f;
 
     public void Initialize(Spawner spawner, Transform spawnPoint)
     {
@@ -26,6 +26,7 @@ public class ObjectTapped : MonoBehaviour
 
     void Swipe()
     {
+        // Touch Input
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -63,6 +64,40 @@ public class ObjectTapped : MonoBehaviour
                 stopTouch = false;
                 startTouchPosition = currentTouchPosition = Vector2.zero;
             }
+        }
+
+        // Mouse Input
+        if (Input.GetMouseButtonDown(0))
+        {
+            startTouchPosition = Input.mousePosition;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            currentTouchPosition = Input.mousePosition;
+            Vector2 distance = currentTouchPosition - startTouchPosition;
+
+            if (!stopTouch)
+            {
+                if (distance.y > swipeRange)
+                {
+                    Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(startTouchPosition);
+                    RaycastHit2D hit = Physics2D.Raycast(mouseWorldPosition, Vector2.zero);
+
+                    if (hit.collider != null && hit.collider.transform == transform)
+                    {
+                        Destroy(gameObject);
+                        spawner.ObjectDestroyed(spawnPoint);
+                        stopTouch = true;
+                    }
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            stopTouch = false;
+            startTouchPosition = currentTouchPosition = Vector2.zero;
         }
     }
 }
