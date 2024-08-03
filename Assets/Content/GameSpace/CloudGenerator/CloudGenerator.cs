@@ -9,6 +9,8 @@ public class CloudGenerator : MonoBehaviour
     [SerializeField] GameObject endPoint;
     [SerializeField] float minSpawnInterval = 2f;
     [SerializeField] float maxSpawnInterval = 5f;
+    [SerializeField] int preSpawnCloudCount = 5;
+    [SerializeField] float cloudSpacing = 1.5f;
 
     Vector3 startPos;
 
@@ -17,7 +19,29 @@ public class CloudGenerator : MonoBehaviour
         startPos = transform.position;
 
         spawnCloud();
+        PreSpawnClouds();
         ScheduleNextSpawn();
+    }
+
+    void PreSpawnClouds()
+    {
+        float startY = startPos.y;
+        float spacing = cloudSpacing;
+
+        for (int i = 0; i < preSpawnCloudCount; i++)
+        {
+            float posX = startPos.x - i * spacing;
+            float posY = UnityEngine.Random.Range(startY - 2f, startY + 1f);
+
+            int randomIndex = UnityEngine.Random.Range(0, clouds.Length);
+            GameObject cloud = Instantiate(clouds[randomIndex], new Vector3(posX, posY, startPos.z), Quaternion.identity);
+
+            float scale = UnityEngine.Random.Range(0.8f, 1.2f);
+            cloud.transform.localScale = new Vector3(scale, scale, scale);
+
+            float speed = UnityEngine.Random.Range(0.5f, 1.5f);
+            cloud.GetComponent<Cloud>().startFloating(speed, endPoint.transform.position.x);
+        }
     }
 
     void spawnCloud()
