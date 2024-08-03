@@ -55,7 +55,7 @@ public class CloudGenerator : MonoBehaviour
         float scale = UnityEngine.Random.Range(0.8f, 1.2f);
         cloud.transform.localScale = new Vector2(scale, scale);
 
-        float speed = UnityEngine.Random.Range(0.5f, 1.5f);
+        float speed = UnityEngine.Random.Range(0.5f, 1f);
         cloud.GetComponent<Cloud>().startFloating(speed, endPoint.transform.position.x);
     }
 
