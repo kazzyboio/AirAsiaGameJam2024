@@ -103,6 +103,7 @@ public class Timer : MonoBehaviour
                 anim.Play("Default");
                 anim.Play("TimesUp");
                 FindObjectOfType<SoundManager>().Play("Whistle");
+                SceneChanger.Instance.ChangeScene("EndScene");
             }
 
             timerSlider.value = timeRemaining;

@@ -280,7 +280,6 @@ GameObject:
   - component: {fileID: 5954808278315992992}
   - component: {fileID: 2376971209498649680}
   - component: {fileID: 7514006599750135326}
-  - component: {fileID: 5701614943126783173}
   m_Layer: 0
   m_Name: TimesUpImage
   m_TagString: Untagged
@@ -345,27 +344,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &5701614943126783173
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5572495875876441777}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 61042086097a58b4d92462e42f2290c8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5610653936553889214
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +462,6 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 0, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
   anim: {fileID: 2314242995957236411}
-  endAnim: {fileID: 5701614943126783173}
 --- !u!1 &5721017866241465129
 GameObject:
   m_ObjectHideFlags: 0
