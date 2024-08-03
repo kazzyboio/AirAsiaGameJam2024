@@ -8,7 +8,7 @@ public class ObjectTapped : MonoBehaviour
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private bool stopTouch = false;
-    private float swipeRange = 150.0f;
+    private float swipeRange = 0.1f;
 
     void Update()
     {
@@ -34,6 +34,7 @@ public class ObjectTapped : MonoBehaviour
 
                 if (!stopTouch)
                 {
+                    float normalizedDistance = distance.y / Screen.height;
                     if (distance.y > swipeRange)
                     {
                         Vector2 touchWorldPosition = Camera.main.ScreenToWorldPoint(startTouchPosition);
@@ -68,7 +69,9 @@ public class ObjectTapped : MonoBehaviour
 
             if (!stopTouch)
             {
-                if (distance.y > swipeRange)
+                float normalizedDistance = distance.y / Screen.height;
+
+                if (normalizedDistance > swipeRange)
                 {
                     Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(startTouchPosition);
                     RaycastHit2D hit = Physics2D.Raycast(mouseWorldPosition, Vector2.zero);

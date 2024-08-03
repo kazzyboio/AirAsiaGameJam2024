@@ -12,8 +12,8 @@ public class BiggieDisrupt : MonoBehaviour
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private bool stopTouch = false, despawning = false;
-    private float swipeRange = 150.0f;
-   
+    private float swipeRange = 0.1f;
+
     private void Awake()
     {
         screenDisrupt = GameObject.Find("BiggieScreenDisrupt");
@@ -50,7 +50,10 @@ public class BiggieDisrupt : MonoBehaviour
 
                 if (!stopTouch)
                 {
-                    if (distance.y > swipeRange)
+
+                    float normalizedDistance = distance.y / Screen.height;
+
+                    if (normalizedDistance > swipeRange)
                     {
                         Vector2 touchWorldPosition = Camera.main.ScreenToWorldPoint(startTouchPosition);
                         RaycastHit2D hit = Physics2D.Raycast(touchWorldPosition, Vector2.zero);
