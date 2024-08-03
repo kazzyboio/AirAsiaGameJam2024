@@ -35,7 +35,6 @@ public class Spawner : MonoBehaviour
     {
         StartCoroutine(StartSpawning());
         StartCoroutine(StartSpawning());
-        StartCoroutine(StartSpawning());
         StartCoroutine(SpawningAmp());
     }
 
@@ -89,14 +88,14 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawningAmp()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         StartCoroutine(StartSpawning());
         StartCoroutine(SpawningAmper());
     }
 
     private IEnumerator SpawningAmper()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(12f);
         StartCoroutine(StartSpawning());
         StartCoroutine(StartSpawning());
     }
