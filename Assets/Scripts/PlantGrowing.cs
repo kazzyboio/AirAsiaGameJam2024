@@ -68,7 +68,7 @@ public class PlantGrowing : MonoBehaviour
             counter--;
         }
         currentStage = "Died";
-        ScoreManager.instance.currentCombo = 1;
+        ScoreManager.instance.currentCombo = 0;
         RemovePlant();
     }
 
@@ -80,15 +80,16 @@ public class PlantGrowing : MonoBehaviour
             CancelInvoke("RemovePlant");
             spawnPluckedSprite();
 
+            ScoreManager.instance.AddToScore(givenScore);
             if (currentStage == "Blooming")
             {
                 ScoreManager.instance.currentCombo += 1;
+                ScoreManager.instance.AddToPluckCounter();
             }
             else 
             {
-                ScoreManager.instance.currentCombo = 1;
+                ScoreManager.instance.currentCombo = 0;
             }
-            ScoreManager.instance.AddToScore(givenScore);
             //play harvest animation
             currentStage = "Harvested";
             Invoke("RemovePlant", 0.1f);
