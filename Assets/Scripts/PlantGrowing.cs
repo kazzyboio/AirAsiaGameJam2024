@@ -140,7 +140,7 @@ public class PlantGrowing : MonoBehaviour
     private IEnumerator ApplyGravity(Rigidbody2D rb)
     {
         yield return new WaitForSeconds(0.05f); 
-        rb.gravityScale = 1f; 
+        rb.gravityScale = 2f; 
     }
 
 
