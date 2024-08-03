@@ -45,6 +45,8 @@ public class TappyAddTime : MonoBehaviour
                         {
                             IncreaseTimer();
                             stopTouch = true;
+                            Destroy(gameObject);
+
                         }
                     }
                 }
@@ -79,6 +81,7 @@ public class TappyAddTime : MonoBehaviour
                     {
                         IncreaseTimer();
                         stopTouch = true;
+                        Destroy(gameObject);
                     }
                 }
             }
