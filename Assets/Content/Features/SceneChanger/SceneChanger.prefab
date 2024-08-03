@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1924968809435137667}
   fadeDuration: 1
+  sceneLoadDelay: 1
 --- !u!95 &1924968809435137667
 Animator:
   serializedVersion: 5
