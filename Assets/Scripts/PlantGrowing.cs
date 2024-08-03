@@ -24,7 +24,6 @@ public class PlantGrowing : MonoBehaviour
         StartCoroutine(BloomCountdown(sproutTime));
         givenScore = sproutScore;
         currentStage = "Sprouting";
-        sprite.color = Color.green;
     }
 
     IEnumerator BloomCountdown(int seconds)
@@ -36,7 +35,6 @@ public class PlantGrowing : MonoBehaviour
             counter--;
         }
         currentStage = "Blooming";
-        sprite.color = Color.red;
         givenScore = bloomedScore;
         StartCoroutine(WiltCountdown(bloomTime));
     }
@@ -50,7 +48,6 @@ public class PlantGrowing : MonoBehaviour
             counter--;
         }
         currentStage = "Wilting";
-        sprite.color = Color.black;
         givenScore = wiltedScore;
         // play wilt animation
         StartCoroutine(KillCountdown(wiltTime));
@@ -65,7 +62,6 @@ public class PlantGrowing : MonoBehaviour
             counter--;
         }
         currentStage = "Died";
-        sprite.color = Color.grey;
         yield return new WaitForSeconds(3);
         ScoreManager.instance.currentCombo = 1;
         RemovePlant();
@@ -89,7 +85,6 @@ public class PlantGrowing : MonoBehaviour
             ScoreManager.instance.AddToScore(givenScore);
             //play harvest animation
             currentStage = "Harvested";
-            sprite.color = Color.yellow;
             Invoke("RemovePlant", 3);
         }
     }
