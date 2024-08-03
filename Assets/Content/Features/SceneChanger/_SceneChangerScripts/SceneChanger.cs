@@ -11,8 +11,7 @@ public class SceneChanger : MonoBehaviour
         none
     }
 
-    public static SceneChanger Instance;
-    public Animator anim; 
+    public Animator anim;
     public float fadeDuration;
     public float sceneLoadDelay = 1f;
 
@@ -22,17 +21,7 @@ public class SceneChanger : MonoBehaviour
 
     void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -42,10 +31,6 @@ public class SceneChanger : MonoBehaviour
         {
             anim.Play("FadeIn");
             currentFadeStatus = FadeStatus.fading_in;
-        }
-        else
-        {
-            Debug.LogWarning("Animator is null!");
         }
     }
 
