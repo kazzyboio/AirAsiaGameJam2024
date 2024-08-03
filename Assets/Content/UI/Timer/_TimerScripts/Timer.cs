@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
     [SerializeField] public Image timerFillImage;
     [SerializeField] public Color[] fillColors;
     [SerializeField] public Animator anim;
+    [SerializeField] public float timesUpTime;
 
     private bool stopTimer = false;
     private float initialTime;
@@ -103,6 +104,19 @@ public class Timer : MonoBehaviour
                 anim.Play("Default");
                 anim.Play("TimesUp");
                 FindObjectOfType<SoundManager>().Play("Whistle");
+                StartCoroutine(SwitchScene());
+            }
+
+            IEnumerator SwitchScene()
+            {
+                yield return new WaitForSeconds(timesUpTime);
+
+                SceneChanger sceneChanger = FindObjectOfType<SceneChanger>();
+                if (sceneChanger != null)
+                {
+                    sceneChanger.ChangeScene("EndScene");
+                }
+                
             }
 
             timerSlider.value = timeRemaining;
