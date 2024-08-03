@@ -1,23 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class BiggieDisrupt : MonoBehaviour
+public class TappyAddTime : MonoBehaviour
 {
-    public GameObject screenDisrupt; 
-    public float blockDuration = 2.0f; 
-    public float fadeDuration = 1.0f;
- 
+    public Timer timer; 
+    public float increaseAmount = 5f; 
+
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private bool stopTouch = false;
     private float swipeRange = 150.0f;
-
-    private void Start()
-    {
-        screenDisrupt.SetActive(false);
-    }
 
     void Update()
     {
@@ -44,13 +37,13 @@ public class BiggieDisrupt : MonoBehaviour
                 if (!stopTouch)
                 {
                     if (distance.y > swipeRange)
-                    {
+                    {                    
                         Vector2 touchWorldPosition = Camera.main.ScreenToWorldPoint(startTouchPosition);
                         RaycastHit2D hit = Physics2D.Raycast(touchWorldPosition, Vector2.zero);
 
                         if (hit.collider != null && hit.collider.transform == transform)
                         {
-                            StartCoroutine(DisruptScreen());
+                            IncreaseTimer();
                             stopTouch = true;
                         }
                     }
@@ -84,7 +77,7 @@ public class BiggieDisrupt : MonoBehaviour
 
                     if (hit.collider != null && hit.collider.transform == transform)
                     {
-                        StartCoroutine(DisruptScreen());
+                        IncreaseTimer();
                         stopTouch = true;
                     }
                 }
@@ -98,37 +91,9 @@ public class BiggieDisrupt : MonoBehaviour
         }
     }
 
-    private IEnumerator DisruptScreen()
+    void IncreaseTimer()
     {
-        screenDisrupt.SetActive(true);
-        Image image = screenDisrupt.GetComponent<Image>();
-
-        if (image != null)
-        {
-            Color color = image.color;
-            color.a = 1f; 
-            image.color = color;
-        }
-
-        yield return new WaitForSeconds(blockDuration); 
-
-        if (image != null)
-        {
-            float elapsedTime = 0f;
-            while (elapsedTime < fadeDuration)
-            {
-                elapsedTime += Time.deltaTime;
-                Color color = image.color;
-                color.a = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration); 
-                image.color = color; 
-                yield return null; 
-            }
-
-            Color finalColor = image.color;
-            finalColor.a = 0f;
-            image.color = finalColor;
-        }
-
-        screenDisrupt.SetActive(false);
+        timer.timeRemaining = Mathf.Min(timer.timeRemaining + increaseAmount, 30f);
     }
 }
+
