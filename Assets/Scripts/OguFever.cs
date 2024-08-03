@@ -1,29 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class BiggieDisrupt : MonoBehaviour
+public class OguFever : MonoBehaviour
 {
-    public GameObject screenDisrupt;
-    public float blockDuration = 2.0f, fadeDuration = 1.0f;
-    public int despawnTime = 4;
- 
+    [SerializeField]
+    private int despawnTime = 4;
+    [SerializeField]
+    private float feverLength = 5;
+
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private bool stopTouch = false, despawning = false;
     private float swipeRange = 150.0f;
-   
-    private void Awake()
-    {
-        screenDisrupt = GameObject.Find("BiggieScreenDisrupt");
-    }
 
     private void Start()
     {
         StartCoroutine(KillCountdown(despawnTime));
-        Spawner.instance.listOfPlants[1].plantSpawnChance = 0f;
-        screenDisrupt.GetComponent<Image>().color = Color.clear;
+        Spawner.instance.listOfPlants[3].plantSpawnChance = 0f;
     }
 
     void Update()
@@ -57,7 +51,7 @@ public class BiggieDisrupt : MonoBehaviour
 
                         if (hit.collider != null && hit.collider.transform == transform)
                         {
-                            StartDisrupt();
+                            TriggerFever();
                             stopTouch = true;
                         }
                     }
@@ -91,7 +85,7 @@ public class BiggieDisrupt : MonoBehaviour
 
                     if (hit.collider != null && hit.collider.transform == transform)
                     {
-                        StartDisrupt();
+                        TriggerFever();
                         stopTouch = true;
                     }
                 }
@@ -105,50 +99,20 @@ public class BiggieDisrupt : MonoBehaviour
         }
     }
 
-    private void StartDisrupt()
+    void TriggerFever()
     {
         if (!despawning)
         {
-            despawning = true;
             StopAllCoroutines();
-            StartCoroutine(DisruptScreen());
+            ScoreManager.instance.feverMultiplyer = 2;
+            StartCoroutine(EndFever(feverLength));
         }
     }
 
-
-    private IEnumerator DisruptScreen()
+    IEnumerator EndFever(float seconds)
     {
-        ScoreManager.instance.currentCombo = 0;
-        screenDisrupt.GetComponent<Image>().color = Color.red;
-        Image image = screenDisrupt.GetComponent<Image>();
-
-        if (image != null)
-        {
-            Color color = image.color;
-            color.a = 1f;
-            image.color = color;
-        }
-
-        yield return new WaitForSeconds(blockDuration);
-
-        if (image != null)
-        {
-            float elapsedTime = 0f;
-            while (elapsedTime < fadeDuration)
-            {
-                elapsedTime += Time.deltaTime;
-                Color color = image.color;
-                color.a = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
-                image.color = color;
-                yield return null;
-            }
-
-            Color finalColor = image.color;
-            finalColor.a = 0f;
-            image.color = finalColor;
-        }
-
-        screenDisrupt.GetComponent<Image>().color = Color.clear;
+        yield return new WaitForSeconds(seconds);
+        ScoreManager.instance.feverMultiplyer = 1;
         RemovePlant();
     }
 
@@ -162,12 +126,12 @@ public class BiggieDisrupt : MonoBehaviour
         }
         despawning = true;
         yield return new WaitForSeconds(0.25f);
+        ScoreManager.instance.currentCombo = 0;
         RemovePlant();
     }
 
     public void RemovePlant()
     {
-        Spawner.instance.listOfPlants[1].plantSpawnChance = 0.1f;
         Destroy(gameObject);
     }
 }

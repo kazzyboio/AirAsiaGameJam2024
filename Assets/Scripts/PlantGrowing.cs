@@ -66,8 +66,8 @@ public class PlantGrowing : MonoBehaviour
         }
         currentStage = "Died";
         sprite.color = Color.grey;
-        yield return new WaitForSeconds(3);
-        ScoreManager.instance.currentCombo = 1;
+        yield return new WaitForSeconds(0.25f);
+        ScoreManager.instance.currentCombo = 0;
         RemovePlant();
     }
 
@@ -78,19 +78,20 @@ public class PlantGrowing : MonoBehaviour
             StopAllCoroutines();
             CancelInvoke("RemovePlant");
 
+            ScoreManager.instance.AddToScore(givenScore);
             if (currentStage == "Blooming")
             {
                 ScoreManager.instance.currentCombo += 1;
+                ScoreManager.instance.AddToPluckCounter();
             }
             else
             {
-                ScoreManager.instance.currentCombo = 1;
+                ScoreManager.instance.currentCombo = 0;
             }
-            ScoreManager.instance.AddToScore(givenScore);
             //play harvest animation
             currentStage = "Harvested";
             sprite.color = Color.yellow;
-            Invoke("RemovePlant", 3);
+            Invoke("RemovePlant", 0.25f);
         }
     }
 

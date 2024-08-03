@@ -1,16 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class TappyAddTime : MonoBehaviour
 {
-    public Timer timer; 
-    public float increaseAmount = 5f; 
+    public Timer timer;
+    public float increaseAmount = 5f;
+    public int despawnTime = 4; 
 
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
-    private bool stopTouch = false;
+    private bool stopTouch = false, despawning = false;
     private float swipeRange = 150.0f;
+
+    private void Awake()
+    {
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(KillCountdown(despawnTime));
+        Spawner.instance.listOfPlants[2].plantSpawnChance = 0f;
+        ScoreManager.instance.pluckCounter = 0;
+    }
 
     void Update()
     {
@@ -45,7 +59,6 @@ public class TappyAddTime : MonoBehaviour
                         {
                             IncreaseTimer();
                             stopTouch = true;
-                            Destroy(gameObject);
 
                         }
                     }
@@ -81,7 +94,6 @@ public class TappyAddTime : MonoBehaviour
                     {
                         IncreaseTimer();
                         stopTouch = true;
-                        Destroy(gameObject);
                     }
                 }
             }
@@ -96,7 +108,31 @@ public class TappyAddTime : MonoBehaviour
 
     void IncreaseTimer()
     {
-        timer.timeRemaining = Mathf.Min(timer.timeRemaining + increaseAmount, 30f);
+        if (!despawning)
+        {
+            StopAllCoroutines();
+            timer.timeRemaining = Mathf.Min(timer.timeRemaining + increaseAmount, 30f);
+            Invoke("RemovePlant", 0.25f);
+        }
+    }
+
+    IEnumerator KillCountdown(int seconds)
+    {
+        int counter = seconds;
+        while (counter > 0)
+        {
+            yield return new WaitForSeconds(1);
+            counter--;
+        }
+        despawning = true;
+        yield return new WaitForSeconds(0.25f);
+        ScoreManager.instance.currentCombo = 0;
+        RemovePlant();
+    }
+
+    public void RemovePlant()
+    {
+        Destroy(gameObject);
     }
 }
 

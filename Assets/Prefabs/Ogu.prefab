@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 230934910166292722}
   - component: {fileID: 4988839802898599129}
   - component: {fileID: 4980293458737015706}
-  - component: {fileID: 1135966453944007005}
+  - component: {fileID: 6997251012711918559}
   m_Layer: 0
-  m_Name: Tappy
+  m_Name: Ogu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.59982157, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1135966453944007005
+--- !u!114 &6997251012711918559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,9 +140,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 342547742832870669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26edb66b904d77343bd90aaba574a88d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e8f433bcab3b93458251fd289568898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 0}
-  increaseAmount: 3
   despawnTime: 4
+  feverLength: 5
