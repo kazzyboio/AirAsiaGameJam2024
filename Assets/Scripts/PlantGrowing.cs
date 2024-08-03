@@ -10,9 +10,9 @@ public class PlantGrowing : MonoBehaviour
     public string currentStage;
 
     [SerializeField]
-    private int bloomTime = 5, wiltTime = 3, sproutScore = 100, bloomedScore = 300;
+    private int sproutTime = 1, bloomTime = 2, wiltTime = 1, sproutScore = 100, bloomedScore = 300, wiltedScore = 100;
     private SpriteRenderer sprite;
-    private string[] growthStages = new string[3] {"Sprouting", "Blooming", "Wilting"};
+    private string[] growthStages = new string[5] {"Sprouting", "Blooming", "Wilting", "Harvested", "Died"};
 
     private void Awake()
     {
@@ -21,10 +21,10 @@ public class PlantGrowing : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(BloomCountdown(bloomTime));
+        StartCoroutine(BloomCountdown(sproutTime));
         givenScore = sproutScore;
+        currentStage = "Sprouting";
         sprite.color = Color.green;
-        currentStage = growthStages[0];
     }
 
     IEnumerator BloomCountdown(int seconds)
@@ -35,10 +35,10 @@ public class PlantGrowing : MonoBehaviour
             yield return new WaitForSeconds(1);
             counter--;
         }
+        currentStage = "Blooming";
         sprite.color = Color.red;
-        givenScore = sproutScore;
-        currentStage = growthStages[1];
-        StartCoroutine(WiltCountdown(wiltTime));
+        givenScore = bloomedScore;
+        StartCoroutine(WiltCountdown(bloomTime));
     }
 
     IEnumerator WiltCountdown(int seconds)
@@ -49,13 +49,52 @@ public class PlantGrowing : MonoBehaviour
             yield return new WaitForSeconds(1);
             counter--;
         }
+        currentStage = "Wilting";
         sprite.color = Color.black;
-        givenScore = 0;
-        currentStage = growthStages[2];
-        Invoke("Wilt", 3);
+        givenScore = wiltedScore;
+        // play wilt animation
+        StartCoroutine(KillCountdown(wiltTime));
     }
 
-    public void Wilt()
+    IEnumerator KillCountdown(int seconds)
+    {
+        int counter = seconds;
+        while (counter > 0)
+        {
+            yield return new WaitForSeconds(1);
+            counter--;
+        }
+        currentStage = "Died";
+        sprite.color = Color.grey;
+        yield return new WaitForSeconds(3);
+        ScoreManager.instance.currentCombo = 1;
+        RemovePlant();
+    }
+
+    public void HarvestPlant()
+    {
+        if (currentStage != "Died" && currentStage != "Harvested")
+        {
+            StopAllCoroutines();
+            CancelInvoke("RemovePlant");
+
+            if (currentStage == "Blooming")
+            {
+                ScoreManager.instance.currentCombo += 1;
+            }
+            else
+            {
+                ScoreManager.instance.currentCombo = 1;
+            }
+            ScoreManager.instance.AddToScore(givenScore);
+            //play harvest animation
+            currentStage = "Harvested";
+            sprite.color = Color.yellow;
+            Invoke("RemovePlant", 3);
+        }
+    }
+
+    public void RemovePlant()
     {
         Destroy(gameObject);
     }
