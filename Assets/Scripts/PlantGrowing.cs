@@ -13,6 +13,12 @@ public class PlantGrowing : MonoBehaviour
     private int sproutTime = 1, bloomTime = 2, wiltTime = 1, sproutScore = 100, bloomedScore = 300, wiltedScore = 100;
     private SpriteRenderer sprite;
     private string[] growthStages = new string[5] {"Sprouting", "Blooming", "Wilting", "Harvested", "Died"};
+    public GameObject pluckedSprite;
+    public float explosionForce = 10f;
+    public float pluckedLifetime = 10f;
+    public Sprite bloomSprite; 
+    public Sprite sproutSprite; 
+    public Sprite wiltSprite;
 
     private void Awake()
     {
@@ -62,7 +68,6 @@ public class PlantGrowing : MonoBehaviour
             counter--;
         }
         currentStage = "Died";
-        yield return new WaitForSeconds(0.25f);
         ScoreManager.instance.currentCombo = 1;
         RemovePlant();
     }
@@ -73,21 +78,70 @@ public class PlantGrowing : MonoBehaviour
         {
             StopAllCoroutines();
             CancelInvoke("RemovePlant");
+            spawnPluckedSprite();
 
             if (currentStage == "Blooming")
             {
                 ScoreManager.instance.currentCombo += 1;
             }
-            else
+            else 
             {
                 ScoreManager.instance.currentCombo = 1;
             }
             ScoreManager.instance.AddToScore(givenScore);
             //play harvest animation
             currentStage = "Harvested";
-            Invoke("RemovePlant", 0.25f);
+            Invoke("RemovePlant", 0.1f);
         }
     }
+
+    public void spawnPluckedSprite()
+    {
+        GameObject spawnedSprite = Instantiate(pluckedSprite, transform.position, Quaternion.identity);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        float randomAngle = Random.Range(80f, 100f);
+        Vector2 direction = new Vector2(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad));
+
+        SpriteRenderer spriteRenderer = spawnedSprite.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            switch (currentStage.ToLower())
+            {
+                case "blooming":
+                    spriteRenderer.sprite = bloomSprite;
+                    break;
+
+                case "sprouting":
+                    spriteRenderer.sprite = sproutSprite;
+                    break; 
+
+                case "wilting":
+                    spriteRenderer.sprite = wiltSprite;
+                    break;
+
+            }
+        }
+
+        Rigidbody2D rb = spawnedSprite.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            Vector2 force = direction * explosionForce;
+            rb.velocity = force;
+            StartCoroutine(ApplyGravity(rb));
+        }
+
+        Destroy(spawnedSprite, pluckedLifetime);
+    }
+
+    private IEnumerator ApplyGravity(Rigidbody2D rb)
+    {
+        yield return new WaitForSeconds(0.05f); 
+        rb.gravityScale = 1f; 
+    }
+
 
     public void RemovePlant()
     {
