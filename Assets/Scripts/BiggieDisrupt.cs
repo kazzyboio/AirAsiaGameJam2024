@@ -5,14 +5,26 @@ using UnityEngine.UI;
 
 public class BiggieDisrupt : MonoBehaviour
 {
-    //public GameObject screenDisrupt; 
-    public float blockDuration = 2.0f; 
-    //public float fadeDuration = 1.0f;
+    public GameObject screenDisrupt;
+    public float blockDuration = 2.0f, fadeDuration = 1.0f;
+    public int despawnTime = 4;
  
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
-    private bool stopTouch = false;
+    private bool stopTouch = false, despawning = false;
     private float swipeRange = 150.0f;
+   
+    private void Awake()
+    {
+        screenDisrupt = GameObject.Find("BiggieScreenDisrupt");
+    }
+
+    private void Start()
+    {
+        StartCoroutine(KillCountdown(despawnTime));
+        Spawner.instance.listOfPlants[1].plantSpawnChance = 0f;
+        screenDisrupt.GetComponent<Image>().color = Color.clear;
+    }
 
     void Update()
     {
@@ -45,8 +57,7 @@ public class BiggieDisrupt : MonoBehaviour
 
                         if (hit.collider != null && hit.collider.transform == transform)
                         {
-                            ScreenDisrupter.Instance.ShowDisruptScreen(blockDuration);
-                            Destroy(gameObject);
+                            StartDisrupt();
                             stopTouch = true;
                         }
                     }
@@ -80,8 +91,7 @@ public class BiggieDisrupt : MonoBehaviour
 
                     if (hit.collider != null && hit.collider.transform == transform)
                     {
-                        ScreenDisrupter.Instance.ShowDisruptScreen(blockDuration);
-                        Destroy(gameObject);
+                        StartDisrupt();
                         stopTouch = true;
                     }
                 }
@@ -93,5 +103,71 @@ public class BiggieDisrupt : MonoBehaviour
             stopTouch = false;
             startTouchPosition = currentTouchPosition = Vector2.zero;
         }
+    }
+
+    private void StartDisrupt()
+    {
+        if (!despawning)
+        {
+            despawning = true;
+            StopAllCoroutines();
+            StartCoroutine(DisruptScreen());
+        }
+    }
+
+
+    private IEnumerator DisruptScreen()
+    {
+        ScoreManager.instance.currentCombo = 0;
+        screenDisrupt.GetComponent<Image>().color = Color.red;
+        Image image = screenDisrupt.GetComponent<Image>();
+
+        if (image != null)
+        {
+            Color color = image.color;
+            color.a = 1f;
+            image.color = color;
+        }
+
+        yield return new WaitForSeconds(blockDuration);
+
+        if (image != null)
+        {
+            float elapsedTime = 0f;
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                Color color = image.color;
+                color.a = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+                image.color = color;
+                yield return null;
+            }
+
+            Color finalColor = image.color;
+            finalColor.a = 0f;
+            image.color = finalColor;
+        }
+
+        screenDisrupt.GetComponent<Image>().color = Color.clear;
+        RemovePlant();
+    }
+
+    IEnumerator KillCountdown(int seconds)
+    {
+        int counter = seconds;
+        while (counter > 0)
+        {
+            yield return new WaitForSeconds(1);
+            counter--;
+        }
+        despawning = true;
+        yield return new WaitForSeconds(0.25f);
+        RemovePlant();
+    }
+
+    public void RemovePlant()
+    {
+        Spawner.instance.listOfPlants[1].plantSpawnChance = 0.1f;
+        Destroy(gameObject);
     }
 }

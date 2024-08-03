@@ -13,6 +13,12 @@ public class PlantGrowing : MonoBehaviour
     private int sproutTime = 1, bloomTime = 2, wiltTime = 1, sproutScore = 100, bloomedScore = 300, wiltedScore = 100;
     private SpriteRenderer sprite;
     private string[] growthStages = new string[5] {"Sprouting", "Blooming", "Wilting", "Harvested", "Died"};
+    public GameObject pluckedSprite;
+    public float explosionForce = 10f;
+    public float pluckedLifetime = 10f;
+    public Sprite bloomSprite; 
+    public Sprite sproutSprite; 
+    public Sprite wiltSprite;
 
     private void Awake()
     {
@@ -24,7 +30,6 @@ public class PlantGrowing : MonoBehaviour
         StartCoroutine(BloomCountdown(sproutTime));
         givenScore = sproutScore;
         currentStage = "Sprouting";
-        sprite.color = Color.green;
     }
 
     IEnumerator BloomCountdown(int seconds)
@@ -36,7 +41,6 @@ public class PlantGrowing : MonoBehaviour
             counter--;
         }
         currentStage = "Blooming";
-        sprite.color = Color.red;
         givenScore = bloomedScore;
         StartCoroutine(WiltCountdown(bloomTime));
     }
@@ -50,7 +54,6 @@ public class PlantGrowing : MonoBehaviour
             counter--;
         }
         currentStage = "Wilting";
-        sprite.color = Color.black;
         givenScore = wiltedScore;
         // play wilt animation
         StartCoroutine(KillCountdown(wiltTime));
@@ -65,9 +68,7 @@ public class PlantGrowing : MonoBehaviour
             counter--;
         }
         currentStage = "Died";
-        sprite.color = Color.grey;
-        yield return new WaitForSeconds(3);
-        ScoreManager.instance.currentCombo = 1;
+        ScoreManager.instance.currentCombo = 0;
         RemovePlant();
     }
 
@@ -77,22 +78,71 @@ public class PlantGrowing : MonoBehaviour
         {
             StopAllCoroutines();
             CancelInvoke("RemovePlant");
+            spawnPluckedSprite();
 
+            ScoreManager.instance.AddToScore(givenScore);
             if (currentStage == "Blooming")
             {
                 ScoreManager.instance.currentCombo += 1;
+                ScoreManager.instance.AddToPluckCounter();
             }
-            else
+            else 
             {
-                ScoreManager.instance.currentCombo = 1;
+                ScoreManager.instance.currentCombo = 0;
             }
-            ScoreManager.instance.AddToScore(givenScore);
             //play harvest animation
             currentStage = "Harvested";
-            sprite.color = Color.yellow;
-            Invoke("RemovePlant", 3);
+            Invoke("RemovePlant", 0.1f);
         }
     }
+
+    public void spawnPluckedSprite()
+    {
+        GameObject spawnedSprite = Instantiate(pluckedSprite, transform.position, Quaternion.identity);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        float randomAngle = Random.Range(80f, 100f);
+        Vector2 direction = new Vector2(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad));
+
+        SpriteRenderer spriteRenderer = spawnedSprite.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            switch (currentStage.ToLower())
+            {
+                case "blooming":
+                    spriteRenderer.sprite = bloomSprite;
+                    break;
+
+                case "sprouting":
+                    spriteRenderer.sprite = sproutSprite;
+                    break; 
+
+                case "wilting":
+                    spriteRenderer.sprite = wiltSprite;
+                    break;
+
+            }
+        }
+
+        Rigidbody2D rb = spawnedSprite.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            Vector2 force = direction * explosionForce;
+            rb.velocity = force;
+            StartCoroutine(ApplyGravity(rb));
+        }
+
+        Destroy(spawnedSprite, pluckedLifetime);
+    }
+
+    private IEnumerator ApplyGravity(Rigidbody2D rb)
+    {
+        yield return new WaitForSeconds(0.05f); 
+        rb.gravityScale = 2f; 
+    }
+
 
     public void RemovePlant()
     {

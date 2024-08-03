@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5020911146230890115}
   - component: {fileID: 4094651866159227404}
   - component: {fileID: 7883112135547916831}
+  - component: {fileID: 6613496018694776840}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2826613768511676058}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.28, y: -3.37, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.08675194, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: dc168ed957d83fd458ffe443de55635a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,6 +120,12 @@ MonoBehaviour:
   sproutScore: 100
   bloomedScore: 300
   wiltedScore: 100
+  pluckedSprite: {fileID: 3136494856384448258, guid: 73bb2c5f72e1d3c438079fb2b4dbf75b, type: 3}
+  explosionForce: 12
+  pluckedLifetime: 5
+  bloomSprite: {fileID: 21300000, guid: cf2f9dfc52b85194ca785e1d5ef4df25, type: 3}
+  sproutSprite: {fileID: 21300000, guid: 8a2663f3029b29646ad687f91557430e, type: 3}
+  wiltSprite: {fileID: 21300000, guid: dc4e211ba80ae534995a5787aaed72e3, type: 3}
 --- !u!61 &7883112135547916831
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,16 +158,37 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0048526227, y: 0.48039663}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.95, y: 2.97}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.4367242, y: 1.9607933}
   m_EdgeRadius: 0
+--- !u!95 &6613496018694776840
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2826613768511676058}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b9211c465c81c94087675d9d3137530, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

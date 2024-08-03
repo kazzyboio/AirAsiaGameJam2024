@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject objectToSpawn;
+    static public Spawner instance;
     public float minSpawnDelay = 1.5f, maxSpawnDelay = 2.5f;
+    public List<Plant> listOfPlants = new List<Plant>();
 
+    [SerializeField]
+    private int tappyPluckStreakRequirement = 10;
+    [SerializeField]
+    private float oguComboRequirement = 20;
     [SerializeField]
     private List<Transform> spawnPoints = new List<Transform>();
     private float spawnDelay = 1.5f;
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
         foreach (Transform t in GetComponentsInChildren<Transform>())
         { 
             spawnPoints.Add(t);
@@ -21,9 +31,57 @@ public class Spawner : MonoBehaviour
         spawnPoints.Remove(transform);
     }
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(StartSpawning());
+        StartCoroutine(StartSpawning());
+    }
+
+    private void Update()
+    {
+        // Tappy spawn rates (Timer increase)
+        if (ScoreManager.instance.pluckCounter >= tappyPluckStreakRequirement)
+        {
+            listOfPlants[2].plantSpawnChance = 0.15f + (0.02f * (float)(ScoreManager.instance.pluckCounter - tappyPluckStreakRequirement));
+        }
+
+        // Ogu spawn rates (Fever mode)
+        if (ScoreManager.instance.currentCombo % oguComboRequirement == 0.0f && ScoreManager.instance.currentCombo != 0.0f)
+        {
+            listOfPlants[3].plantSpawnChance = 0.3f;
+        }
+    }
+
+    private GameObject DetermineSpawnedPlant()
+    {
+        listOfPlants[0].plantSpawnChance = 1f;
+
+        foreach (Plant plant in listOfPlants)
+        {
+            if (plant.plantName == "Normal")
+            {
+                continue;
+            }
+
+            listOfPlants[0].plantSpawnChance -= plant.plantSpawnChance;
+        }
+
+        float ran = Random.Range(0f, 1f);
+        float cumulativeChance = 0f;
+        GameObject plantToSpawn = null;
+
+        foreach (Plant plant in listOfPlants)
+        {
+            cumulativeChance += plant.plantSpawnChance;
+
+            if (ran <= cumulativeChance)
+            {
+                plantToSpawn = plant.plantPrefab;
+                break;
+            }
+        }
+
+        return plantToSpawn;
     }
 
     private IEnumerator StartSpawning()
@@ -70,7 +128,15 @@ public class Spawner : MonoBehaviour
 
     private void SpawnObjectAt(Transform spawnPoint)
     {
-        GameObject obj = Instantiate(objectToSpawn, spawnPoint.position, spawnPoint.rotation);
+        GameObject obj = Instantiate(DetermineSpawnedPlant(), spawnPoint.position + new Vector3(0f, 0.4f), spawnPoint.rotation);
         obj.transform.parent = spawnPoint.transform;
     }
+}
+
+[System.Serializable]
+public class Plant
+{
+    public string plantName;
+    public GameObject plantPrefab;
+    public float plantSpawnChance;
 }
