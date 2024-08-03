@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Timer : MonoBehaviour
 {
+    [Range (0f, 30f)]
     [SerializeField] public float timeRemaining = 30f;
     [SerializeField] public Slider timerSlider;
     [SerializeField] public Image timerFillImage;
@@ -93,11 +95,14 @@ public class Timer : MonoBehaviour
             // Apply the lerp
             timerFillImage.color = Color.Lerp(fillColors[startColorIndex], fillColors[endColorIndex], t);
 
+            // Timer Ends
             if (timeRemaining <= 0)
             {
                 stopTimer = true;
                 timeRemaining = 0;
-                anim.Play("Default"); 
+                anim.Play("Default");
+                anim.Play("TimesUp");
+                FindObjectOfType<SoundManager>().Play("Whistle");
             }
 
             timerSlider.value = timeRemaining;
