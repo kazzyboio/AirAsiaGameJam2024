@@ -62,7 +62,7 @@ public class PlantGrowing : MonoBehaviour
             counter--;
         }
         currentStage = "Died";
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(0.25f);
         ScoreManager.instance.currentCombo = 1;
         RemovePlant();
     }
@@ -85,7 +85,7 @@ public class PlantGrowing : MonoBehaviour
             ScoreManager.instance.AddToScore(givenScore);
             //play harvest animation
             currentStage = "Harvested";
-            Invoke("RemovePlant", 3);
+            Invoke("RemovePlant", 0.25f);
         }
     }
 
