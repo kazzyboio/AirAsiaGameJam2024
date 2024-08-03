@@ -38,16 +38,14 @@ public class Timer : MonoBehaviour
 
     IEnumerator startTimerTick()
     {
-        bool isShaking = false; // Track if currently in Shake phase
+        bool isShaking = false; 
 
         while (!stopTimer)
         {
             timeRemaining -= Time.deltaTime;
 
-            // Determine the current phase based on remaining time
             if (currentPhase == 2 && timeRemaining <= (2 * initialTime / 3))
             {
-                // Transition from color 2 to color 1
                 startColorIndex = 2;
                 endColorIndex = 1;
                 currentPhase = 1;
@@ -60,7 +58,6 @@ public class Timer : MonoBehaviour
             }
             else if (currentPhase == 1 && timeRemaining <= (initialTime / 3))
             {
-                // Transition from color 1 to color 0
                 startColorIndex = 1;
                 endColorIndex = 0;
                 currentPhase = 0;
@@ -83,7 +80,6 @@ public class Timer : MonoBehaviour
                 }
             }
 
-            // Update color based on the current phase
             if (currentPhase == 2 || currentPhase == 1)
             {
                 t = Mathf.Clamp01(1 - (timeRemaining - (initialTime / 3)) / (initialTime / 3));
@@ -93,10 +89,8 @@ public class Timer : MonoBehaviour
                 t = Mathf.Clamp01(1 - timeRemaining / (initialTime / 3));
             }
 
-            // Apply the lerp
             timerFillImage.color = Color.Lerp(fillColors[startColorIndex], fillColors[endColorIndex], t);
 
-            // Timer Ends
             if (timeRemaining <= 0)
             {
                 stopTimer = true;
