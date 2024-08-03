@@ -9,11 +9,11 @@ public class Spawner : MonoBehaviour
     public List<Plant> listOfPlants = new List<Plant>();
 
     [SerializeField]
-    private List<Transform> spawnPoints = new List<Transform>();
-    [SerializeField]
     private int tappyPluckStreakRequirement = 10;
     [SerializeField]
     private float oguComboRequirement = 20;
+    [SerializeField]
+    private List<Transform> spawnPoints = new List<Transform>();
     private float spawnDelay = 1.5f;
 
     private void Awake()
