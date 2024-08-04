@@ -70,17 +70,25 @@ MonoBehaviour:
     priority: 100
     source: {fileID: 0}
   - name: Harvest1
-    clip: {fileID: 8300000, guid: cdbd74bdc71a2bd4f9ed4022ad5c1581, type: 3}
+    clip: {fileID: 8300000, guid: 78899369ff9ef9d4e94c9d7d3afef344, type: 3}
     mixer: {fileID: 0}
-    volume: 0.3
+    volume: 0.5
     pitch: 1
     loop: 0
     priority: 100
     source: {fileID: 0}
   - name: Harvest2
-    clip: {fileID: 8300000, guid: 9d50cbeabbc4f754b91f0731c133a05a, type: 3}
+    clip: {fileID: 8300000, guid: 2dfd995f1929eba4bac11983cc9de6bb, type: 3}
     mixer: {fileID: 0}
-    volume: 0.3
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    priority: 100
+    source: {fileID: 0}
+  - name: Harvest3
+    clip: {fileID: 8300000, guid: bc8bc3f23ae79ae40a3ab10a6ac83f52, type: 3}
+    mixer: {fileID: 0}
+    volume: 0.5
     pitch: 1
     loop: 0
     priority: 100
@@ -103,6 +111,14 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: TimeGain
     clip: {fileID: 8300000, guid: 762eda91a9ab0b04f910bed5fca2587c, type: 3}
+    mixer: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    priority: 100
+    source: {fileID: 0}
+  - name: Monkey
+    clip: {fileID: 8300000, guid: 44dc4ad97a31158449e6c8ad43f253fd, type: 3}
     mixer: {fileID: 0}
     volume: 0.5
     pitch: 1

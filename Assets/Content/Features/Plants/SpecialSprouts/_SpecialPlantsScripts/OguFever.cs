@@ -126,6 +126,10 @@ public class OguFever : MonoBehaviour
             ScoreManager.instance.feverMultiplyer = 2;
             StartCoroutine(EndFever(feverLength));
             spawnPluckedSprite();
+
+            SoundManager.instance.Play("Monkey");
+            SoundManager.instance.PlayHarvestSound();
+
             StartCoroutine(playOguAnim());
 
             spriteRenderer = GetComponent<SpriteRenderer>();

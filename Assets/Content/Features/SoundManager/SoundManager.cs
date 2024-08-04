@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System;
 using Unity.VisualScripting;
+using Random = UnityEngine.Random;
 
 public class SoundManager : MonoBehaviour
 {
@@ -50,5 +51,23 @@ public class SoundManager : MonoBehaviour
         }
 
         s.source.Play();
+    }
+
+    public void PlayHarvestSound()
+    {
+        int ran = Random.Range(0, 3);
+
+        if (ran == 0)
+        {
+            Play("Harvest1");
+        }
+        else if (ran == 1)
+        {
+            Play("Harvest2");
+        }
+        else if (ran == 2)
+        {
+            Play("Harvest3");
+        }
     }
 }
