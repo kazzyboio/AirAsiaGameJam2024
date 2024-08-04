@@ -325,24 +325,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 6983318894209231541, guid: f52fb78d226ab494fb1e272bfc1ed0d0, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: e2e8e270c62d6b143b9ea83459e1c5c2, type: 2}
-    - target: {fileID: 6983318894209231541, guid: f52fb78d226ab494fb1e272bfc1ed0d0, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -4786898296534162701, guid: e2e8e270c62d6b143b9ea83459e1c5c2, type: 2}
-    - target: {fileID: 6983318894209231541, guid: f52fb78d226ab494fb1e272bfc1ed0d0, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7435923666250017948, guid: f52fb78d226ab494fb1e272bfc1ed0d0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7435923666250017948, guid: f52fb78d226ab494fb1e272bfc1ed0d0, type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435923666250017948, guid: f52fb78d226ab494fb1e272bfc1ed0d0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435923666250017948, guid: f52fb78d226ab494fb1e272bfc1ed0d0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435923666250017948, guid: f52fb78d226ab494fb1e272bfc1ed0d0, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435923666250017948, guid: f52fb78d226ab494fb1e272bfc1ed0d0, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7435923666250017948, guid: f52fb78d226ab494fb1e272bfc1ed0d0, type: 3}
@@ -521,10 +525,6 @@ PrefabInstance:
     - target: {fileID: 2622194259793551436, guid: a74c71d62e5aff0409dcd1b01d660c08, type: 3}
       propertyPath: m_Name
       value: SceneChanger
-      objectReference: {fileID: 0}
-    - target: {fileID: 2622194259793551436, guid: a74c71d62e5aff0409dcd1b01d660c08, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
