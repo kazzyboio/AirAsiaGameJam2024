@@ -48,7 +48,7 @@ MonoBehaviour:
   - name: BGM
     clip: {fileID: 8300000, guid: f72956450a900a640ba8279bddfc5011, type: 3}
     mixer: {fileID: 0}
-    volume: 0.1
+    volume: 0.125
     pitch: 1
     loop: 1
     priority: 100
@@ -56,7 +56,7 @@ MonoBehaviour:
   - name: Whistle
     clip: {fileID: 8300000, guid: 707386e6b6cc0e54c8416dd0d56d5dc4, type: 3}
     mixer: {fileID: 0}
-    volume: 0.3
+    volume: 0.15
     pitch: 1
     loop: 0
     priority: 100
@@ -72,7 +72,7 @@ MonoBehaviour:
   - name: Harvest1
     clip: {fileID: 8300000, guid: 78899369ff9ef9d4e94c9d7d3afef344, type: 3}
     mixer: {fileID: 0}
-    volume: 0.5
+    volume: 0.8
     pitch: 1
     loop: 0
     priority: 100
@@ -80,7 +80,7 @@ MonoBehaviour:
   - name: Harvest2
     clip: {fileID: 8300000, guid: 2dfd995f1929eba4bac11983cc9de6bb, type: 3}
     mixer: {fileID: 0}
-    volume: 0.5
+    volume: 0.8
     pitch: 1
     loop: 0
     priority: 100
@@ -88,7 +88,7 @@ MonoBehaviour:
   - name: Harvest3
     clip: {fileID: 8300000, guid: bc8bc3f23ae79ae40a3ab10a6ac83f52, type: 3}
     mixer: {fileID: 0}
-    volume: 0.5
+    volume: 0.8
     pitch: 1
     loop: 0
     priority: 100
@@ -96,13 +96,13 @@ MonoBehaviour:
   - name: Hehehe
     clip: {fileID: 8300000, guid: f6ecaed25586c6f4d814659923a3ed96, type: 3}
     mixer: {fileID: 0}
-    volume: 0.3
+    volume: 0.2
     pitch: 1
     loop: 0
     priority: 100
     source: {fileID: 0}
   - name: Wilted
-    clip: {fileID: 8300000, guid: 5dc43450e1bc0dd47924934eb260c574, type: 3}
+    clip: {fileID: 8300000, guid: 3a66d4eb9a70d51448c6cccad75932b2, type: 3}
     mixer: {fileID: 0}
     volume: 0.4
     pitch: 1
@@ -121,6 +121,22 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 44dc4ad97a31158449e6c8ad43f253fd, type: 3}
     mixer: {fileID: 0}
     volume: 0.3
+    pitch: 1
+    loop: 0
+    priority: 100
+    source: {fileID: 0}
+  - name: Splat
+    clip: {fileID: 8300000, guid: b289b5ff54d83db47842ec1611d29bdb, type: 3}
+    mixer: {fileID: 0}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    priority: 100
+    source: {fileID: 0}
+  - name: Sprouting
+    clip: {fileID: 8300000, guid: 0b8491f93ae64ec4389f8c3a71c24722, type: 3}
+    mixer: {fileID: 0}
+    volume: 0.15
     pitch: 1
     loop: 0
     priority: 100

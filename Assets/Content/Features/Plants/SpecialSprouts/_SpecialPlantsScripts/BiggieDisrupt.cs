@@ -138,6 +138,7 @@ public class BiggieDisrupt : MonoBehaviour
         if (animator != null)
         {
             animator.Play("Splat");
+            StartCoroutine(SplatSound());
         }
 
         yield return new WaitForSeconds(blockDuration);
@@ -148,6 +149,12 @@ public class BiggieDisrupt : MonoBehaviour
         }
 
         RemovePlant();
+    }
+
+    private IEnumerator SplatSound()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SoundManager.instance.Play("Splat");
     }
 
     public void spawnPluckedSprite()
