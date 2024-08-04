@@ -13,10 +13,24 @@ public class OguFever : MonoBehaviour
     private Vector2 currentTouchPosition;
     private bool stopTouch = false, despawning = false;
 
+    public GameObject pluckedSprite;
+    public float explosionForce = 30f;
+    public float pluckedLifetime = 5f;
+    public Sprite oguSprite;
+    private SpriteRenderer spriteRenderer;
+
+    public GameObject oguAnimator;
+
+    private void Awake()
+    {
+        oguAnimator = GameObject.Find("OguFeverUI");
+    }
+
     private void Start()
     {
         StartCoroutine(KillCountdown(despawnTime));
         Spawner.instance.listOfPlants[3].plantSpawnChance = 0f;
+
     }
 
     void Update()
@@ -111,7 +125,57 @@ public class OguFever : MonoBehaviour
             StopAllCoroutines();
             ScoreManager.instance.feverMultiplyer = 2;
             StartCoroutine(EndFever(feverLength));
+            spawnPluckedSprite();
+            StartCoroutine(playOguAnim());
+
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.enabled = false;
+            }
         }
+    }
+
+    public void spawnPluckedSprite()
+    {
+        GameObject spawnedSprite = Instantiate(pluckedSprite, transform.position, Quaternion.identity);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        float randomAngle = Random.Range(80f, 100f);
+        Vector2 direction = new Vector2(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad));
+
+        SpriteRenderer spriteRenderer = spawnedSprite.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = oguSprite;
+        }
+
+        Rigidbody2D rb = spawnedSprite.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            Vector2 force = direction * explosionForce;
+            rb.velocity = force;
+            StartCoroutine(ApplyGravity(rb));
+        }
+
+        Destroy(spawnedSprite, pluckedLifetime);
+
+    }
+
+    private IEnumerator ApplyGravity(Rigidbody2D rb)
+    {
+        yield return new WaitForSeconds(0.05f);
+        rb.gravityScale = 1f;
+    }
+
+    private IEnumerator playOguAnim() 
+    {
+        Animator anim = oguAnimator.GetComponent<Animator>();
+        yield return new WaitForSeconds(0.01f);
+        anim.Play("OguAnim");
     }
 
     IEnumerator EndFever(float seconds)

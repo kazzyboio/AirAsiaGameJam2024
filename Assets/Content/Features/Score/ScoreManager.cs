@@ -14,6 +14,7 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI scoreText, comboText, feverText;
+    public Animator feverTextAnim;
     [SerializeField]
     private float comboMultiplyer;
     private int totalScore;
@@ -37,7 +38,8 @@ public class ScoreManager : MonoBehaviour
         }
         else
         {
-            feverText.text = "HELL YEAH WE GOONING!!!";
+            feverText.text = "FEVER MODE";
+            feverTextAnim.Play("FeverAnim");
         }
     }
 
