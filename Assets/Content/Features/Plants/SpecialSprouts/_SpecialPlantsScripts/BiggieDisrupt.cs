@@ -6,12 +6,17 @@ using UnityEngine.UI;
 public class BiggieDisrupt : MonoBehaviour
 {
     public GameObject screenDisrupt;
-    public float blockDuration = 2.0f, fadeDuration = 1.0f;
+    public float blockDuration = 1.5f;
     public int despawnTime = 4;
  
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private bool stopTouch = false, despawning = false;
+
+    public GameObject pluckedSprite;
+    public float explosionForce = 12f;
+    public float pluckedLifetime = 5f;
+    public Sprite biggieSprite;
 
     private void Awake()
     {
@@ -118,6 +123,7 @@ public class BiggieDisrupt : MonoBehaviour
             despawning = true;
             StopAllCoroutines();
             StartCoroutine(DisruptScreen());
+            spawnPluckedSprite();
         }
     }
 
@@ -125,37 +131,48 @@ public class BiggieDisrupt : MonoBehaviour
     private IEnumerator DisruptScreen()
     {
         ScoreManager.instance.currentCombo = 0;
-        screenDisrupt.GetComponent<Image>().color = Color.red;
-        Image image = screenDisrupt.GetComponent<Image>();
+        Animator animator = screenDisrupt.GetComponent<Animator>();
 
-        if (image != null)
+        if (animator != null)
         {
-            Color color = image.color;
-            color.a = 1f;
-            image.color = color;
+            animator.Play("Splat");
         }
 
         yield return new WaitForSeconds(blockDuration);
 
-        if (image != null)
+        if (animator != null)
         {
-            float elapsedTime = 0f;
-            while (elapsedTime < fadeDuration)
-            {
-                elapsedTime += Time.deltaTime;
-                Color color = image.color;
-                color.a = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
-                image.color = color;
-                yield return null;
-            }
-
-            Color finalColor = image.color;
-            finalColor.a = 0f;
-            image.color = finalColor;
+            animator.Play("SlideOut");
         }
 
-        screenDisrupt.GetComponent<Image>().color = Color.clear;
         RemovePlant();
+    }
+
+    public void spawnPluckedSprite()
+    {
+        GameObject spawnedSprite = Instantiate(pluckedSprite, transform.position, Quaternion.identity);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        float randomAngle = Random.Range(80f, 100f);
+        Vector2 direction = new Vector2(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad));
+
+        SpriteRenderer spriteRenderer = spawnedSprite.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = biggieSprite;
+        }
+
+        Rigidbody2D rb = spawnedSprite.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            Vector2 force = direction * explosionForce;
+            rb.velocity = force;
+        }
+
+        Destroy(spawnedSprite, pluckedLifetime);
+
     }
 
     IEnumerator KillCountdown(int seconds)
