@@ -105,6 +105,8 @@ public class Timer : MonoBehaviour
             {
                 yield return new WaitForSeconds(timesUpTime);
 
+                ScoreManager.instance.DisableVisibility();
+
                 SceneChanger sceneChanger = FindObjectOfType<SceneChanger>();
                 if (sceneChanger != null)
                 {
