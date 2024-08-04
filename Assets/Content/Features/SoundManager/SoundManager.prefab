@@ -56,7 +56,7 @@ MonoBehaviour:
   - name: Whistle
     clip: {fileID: 8300000, guid: 707386e6b6cc0e54c8416dd0d56d5dc4, type: 3}
     mixer: {fileID: 0}
-    volume: 0.7
+    volume: 0.3
     pitch: 1
     loop: 0
     priority: 100
@@ -104,7 +104,7 @@ MonoBehaviour:
   - name: Wilted
     clip: {fileID: 8300000, guid: 5dc43450e1bc0dd47924934eb260c574, type: 3}
     mixer: {fileID: 0}
-    volume: 0.5
+    volume: 0.4
     pitch: 1
     loop: 0
     priority: 100
@@ -112,7 +112,7 @@ MonoBehaviour:
   - name: TimeGain
     clip: {fileID: 8300000, guid: 762eda91a9ab0b04f910bed5fca2587c, type: 3}
     mixer: {fileID: 0}
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     loop: 0
     priority: 100
@@ -120,7 +120,7 @@ MonoBehaviour:
   - name: Monkey
     clip: {fileID: 8300000, guid: 44dc4ad97a31158449e6c8ad43f253fd, type: 3}
     mixer: {fileID: 0}
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     loop: 0
     priority: 100
