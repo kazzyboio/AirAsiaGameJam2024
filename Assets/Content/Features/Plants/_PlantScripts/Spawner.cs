@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private int tappyPluckStreakRequirement = 10;
     [SerializeField]
-    private float oguComboRequirement = 20;
+    private float oguComboRequirement = 15;
     [SerializeField]
     private List<Transform> spawnPoints = new List<Transform>();
     private float spawnDelay = 1.5f;
@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour
         // Ogu spawn rates (Fever mode)
         if (ScoreManager.instance.currentCombo % oguComboRequirement == 0.0f && ScoreManager.instance.currentCombo != 0.0f)
         {
-            listOfPlants[3].plantSpawnChance = 0.3f;
+            listOfPlants[3].plantSpawnChance = 0.2f;
         }
     }
 

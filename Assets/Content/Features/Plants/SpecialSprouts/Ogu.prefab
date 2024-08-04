@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawnTime: 4
-  feverLength: 10
+  feverLength: 6
   pluckedSprite: {fileID: 3136494856384448258, guid: 73bb2c5f72e1d3c438079fb2b4dbf75b, type: 3}
   explosionForce: 25
   pluckedLifetime: 3
