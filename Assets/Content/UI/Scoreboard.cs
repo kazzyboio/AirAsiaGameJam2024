@@ -32,14 +32,4 @@ public class Scoreboard : MonoBehaviour
             displayedImage.SetNativeSize();
         }    
     }
-
-    public void RestartGame()
-    {
-        SceneChanger sceneChanger = FindObjectOfType<SceneChanger>();
-        if (sceneChanger != null)
-        {
-            SoundManager.instance.Play("MenuTap");
-            sceneChanger.ChangeScene("StartScene");
-        }
-    }
 }

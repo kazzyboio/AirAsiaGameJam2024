@@ -10,8 +10,8 @@ public class EndScreen : MonoBehaviour
         SceneChanger sceneChanger = FindObjectOfType<SceneChanger>();
         if (sceneChanger != null)
         {
+            SoundManager.instance.Play("MenuTap");
             sceneChanger.ChangeScene("GameScene");
-            
         }
 
     }
@@ -22,8 +22,8 @@ public class EndScreen : MonoBehaviour
         SceneChanger sceneChanger = FindObjectOfType<SceneChanger>();
         if (sceneChanger != null)
         {
+            SoundManager.instance.Play("MenuTap");
             sceneChanger.ChangeScene("StartScene");
-
         }
 
     }
