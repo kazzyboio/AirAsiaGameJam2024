@@ -28,6 +28,7 @@ public class MainMenu : MonoBehaviour
             SceneChanger sceneChanger = FindObjectOfType<SceneChanger>();
             if (sceneChanger != null)
             {
+                SoundManager.instance.Play("MenuTap");
                 sceneChanger.ChangeScene("GameScene");
             }
         }
@@ -38,6 +39,7 @@ public class MainMenu : MonoBehaviour
     {
         if (acceptInputs == true)
         {
+            SoundManager.instance.Play("MenuTap");
             GuideMenu.SetActive(true);
         }
     }

@@ -121,6 +121,8 @@ public class TappyAddTime : MonoBehaviour
         if (!despawning)
         {
             StopAllCoroutines();
+            SoundManager.instance.PlayHarvestSound();
+            SoundManager.instance.Play("TimeGain");
             timer.timeRemaining = Mathf.Min(timer.timeRemaining + increaseAmount, 30f);
             Invoke("RemovePlant", 0.25f);
             spawnPluckedSprite();

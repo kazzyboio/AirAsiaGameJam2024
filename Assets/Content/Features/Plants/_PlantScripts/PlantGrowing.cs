@@ -55,7 +55,6 @@ public class PlantGrowing : MonoBehaviour
         }
         currentStage = "Wilting";
         givenScore = wiltedScore;
-        // play wilt animation
         StartCoroutine(KillCountdown(wiltTime));
     }
 
@@ -79,6 +78,7 @@ public class PlantGrowing : MonoBehaviour
             StopAllCoroutines();
             CancelInvoke("RemovePlant");
             spawnPluckedSprite();
+            SoundManager.instance.PlayHarvestSound();
 
             ScoreManager.instance.AddToScore(givenScore);
             if (currentStage == "Blooming")
@@ -89,8 +89,16 @@ public class PlantGrowing : MonoBehaviour
             else 
             {
                 ScoreManager.instance.currentCombo = 0;
+
+                if (currentStage == "Wilting")
+                {
+                    SoundManager.instance.Play("Wilted");
+                }
+                else if (currentStage == "Sprouting")
+                {
+                    //SoundManager.instance.Play("Sprouting");
+                }
             }
-            //play harvest animation
             currentStage = "Harvested";
             Invoke("RemovePlant", 0.1f);
         }

@@ -122,6 +122,8 @@ public class BiggieDisrupt : MonoBehaviour
         {
             despawning = true;
             StopAllCoroutines();
+            SoundManager.instance.PlayHarvestSound();
+            SoundManager.instance.Play("Hehehe");
             StartCoroutine(DisruptScreen());
             spawnPluckedSprite();
         }

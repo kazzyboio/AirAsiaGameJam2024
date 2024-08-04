@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class GuideMenu : MonoBehaviour
 {
-
-    // Update is called once per frame
     public void closeButton()
     {
+        SoundManager.instance.Play("MenuTap");
         gameObject.SetActive(false);
     }
 }
