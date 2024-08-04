@@ -14,6 +14,11 @@ public class TappyAddTime : MonoBehaviour
     private bool stopTouch = false, despawning = false;
     private float swipeRange = 0.1f;
 
+    public GameObject pluckedSprite;
+    public float explosionForce = 12f;
+    public float pluckedLifetime = 5f;
+    public Sprite tappySprite;
+
     private void Awake()
     {
         timer = GameObject.Find("Timer").GetComponent<Timer>();
@@ -116,7 +121,42 @@ public class TappyAddTime : MonoBehaviour
             StopAllCoroutines();
             timer.timeRemaining = Mathf.Min(timer.timeRemaining + increaseAmount, 30f);
             Invoke("RemovePlant", 0.25f);
+            spawnPluckedSprite();
         }
+    }
+
+    public void spawnPluckedSprite()
+    {
+        GameObject spawnedSprite = Instantiate(pluckedSprite, transform.position, Quaternion.identity);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        float randomAngle = Random.Range(80f, 100f);
+        Vector2 direction = new Vector2(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad));
+
+        SpriteRenderer spriteRenderer = spawnedSprite.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = tappySprite;
+        }
+
+        Rigidbody2D rb = spawnedSprite.GetComponent<Rigidbody2D>();
+
+        if (rb != null)
+        {
+            Vector2 force = direction * explosionForce;
+            rb.velocity = force;
+            StartCoroutine(ApplyGravity(rb));
+        }
+
+        Destroy(spawnedSprite, pluckedLifetime);
+
+    }
+
+    private IEnumerator ApplyGravity(Rigidbody2D rb)
+    {
+        yield return new WaitForSeconds(0.05f);
+        rb.gravityScale = 2f;
     }
 
     IEnumerator KillCountdown(int seconds)

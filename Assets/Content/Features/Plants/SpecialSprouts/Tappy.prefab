@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4988839802898599129}
   - component: {fileID: 4980293458737015706}
   - component: {fileID: 1135966453944007005}
+  - component: {fileID: 6182424920804149441}
   m_Layer: 0
   m_Name: Tappy
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0fda65a6eb00de648ba53f9db753589d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,18 +119,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.48494983}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.95, y: 3.11}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.9698997}
   m_EdgeRadius: 0
 --- !u!114 &1135966453944007005
 MonoBehaviour:
@@ -146,3 +147,28 @@ MonoBehaviour:
   timer: {fileID: 0}
   increaseAmount: 3
   despawnTime: 4
+  pluckedSprite: {fileID: 3136494856384448258, guid: 73bb2c5f72e1d3c438079fb2b4dbf75b, type: 3}
+  explosionForce: 12
+  pluckedLifetime: 5
+  tappySprite: {fileID: 21300000, guid: 695fa56149a15fc4490924f75acb5066, type: 3}
+--- !u!95 &6182424920804149441
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342547742832870669}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 93a179974892b5d4c83895be7a34bdad, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
