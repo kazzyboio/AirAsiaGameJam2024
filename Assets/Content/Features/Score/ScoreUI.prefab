@@ -225,58 +225,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 10
   image: {fileID: 511638363783185771}
---- !u!1 &2608633811458280286
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5032022172793066602}
-  - component: {fileID: 7378879291411266999}
-  m_Layer: 0
-  m_Name: ScoreManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5032022172793066602
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2608633811458280286}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8670640512258650017}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7378879291411266999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2608633811458280286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b662c5d71da81d84dbcce49d6ff2e6a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCombo: 1
-  feverMultiplyer: 1
-  pluckCounter: 0
-  scoreText: {fileID: 5181800393869701740}
-  comboText: {fileID: 3372015934086616481}
-  feverText: {fileID: 4561024644513659100}
-  feverTextAnim: {fileID: 1633839813182012568}
-  comboMultiplyer: 0.25
 --- !u!1 &4173899415197729930
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8670640512258650017}
+  - component: {fileID: 1013999397927741746}
   m_Layer: 0
   m_Name: ScoreUI
   m_TagString: Untagged
@@ -306,10 +255,31 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5032022172793066602}
   - {fileID: 4833600509595473762}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1013999397927741746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4173899415197729930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b662c5d71da81d84dbcce49d6ff2e6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCombo: 1
+  feverMultiplyer: 1
+  pluckCounter: 0
+  totalScore: 0
+  highScore: 0
+  scoreText: {fileID: 5181800393869701740}
+  comboText: {fileID: 3372015934086616481}
+  feverText: {fileID: 4561024644513659100}
+  feverTextAnim: {fileID: 1633839813182012568}
+  comboMultiplyer: 0.25
 --- !u!1 &4404771207522735993
 GameObject:
   m_ObjectHideFlags: 0
