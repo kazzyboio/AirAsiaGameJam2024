@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Scoreboard : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI totalScoreText, highScoreText, highComboText, recordComboText;
+    private TextMeshProUGUI totalScoreText, highScoreText, highComboText;
     [SerializeField]
     private Texture2D lowScoreImage, highScoreImage;
     [SerializeField]
@@ -17,10 +17,9 @@ public class Scoreboard : MonoBehaviour
 
     private void Update()
     {
-        totalScoreText.text = "Your Score: " + ScoreManager.instance.totalScore;
-        highComboText.text = "Your Highest Combo: " + ScoreManager.instance.highCombo;
-        highScoreText.text = "High Score: " + ScoreManager.instance.highScore;
-        recordComboText.text = "Record Highest Combo: " + ScoreManager.instance.recordCombo;
+        totalScoreText.text = " " + ScoreManager.instance.totalScore;
+        highComboText.text = " " + ScoreManager.instance.highCombo;
+        highScoreText.text = " " + ScoreManager.instance.highScore;
 
         if (ScoreManager.instance.totalScore >= scoreThreshold)
         {

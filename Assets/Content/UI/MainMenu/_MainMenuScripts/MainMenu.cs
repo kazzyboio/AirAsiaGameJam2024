@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         StartCoroutine(unFreezeInput());
+        GuideMenu.SetActive(false);
     }
 
     IEnumerator unFreezeInput()

@@ -700,15 +700,15 @@ RectTransform:
   m_GameObject: {fileID: 5313886856524982196}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.72, y: 0.72, z: 0.72}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2138354423413405173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 0}
+  m_SizeDelta: {x: 2500, y: 3164.4006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2817169700791560221
 CanvasRenderer:
@@ -1228,6 +1228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GuideMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 303099516177623156, guid: 9d62fc47de121614fa6e66d6b74aa2ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4381794034321711519, guid: 9d62fc47de121614fa6e66d6b74aa2ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1268,13 +1272,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7029585971876349969, guid: 9d62fc47de121614fa6e66d6b74aa2ba, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7786728935226524097, guid: 9d62fc47de121614fa6e66d6b74aa2ba, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d62fc47de121614fa6e66d6b74aa2ba, type: 3}
---- !u!4 &4677529944530802465 stripped
-Transform:
+--- !u!224 &4677529944530802465 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 4381794034321711519, guid: 9d62fc47de121614fa6e66d6b74aa2ba, type: 3}
   m_PrefabInstance: {fileID: 8946029879215339198}
   m_PrefabAsset: {fileID: 0}
