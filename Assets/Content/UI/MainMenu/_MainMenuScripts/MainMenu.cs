@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     public float freezeInputSeconds = 0f;
     private bool acceptInputs = false;
+    [SerializeField] public GameObject GuideMenu = null;
 
     void Start()
     {
@@ -18,16 +20,24 @@ public class MainMenu : MonoBehaviour
         acceptInputs = true;
     }
 
-    void Update()
+    public void playButtonPressed()
     {
-        if (acceptInputs == true && Input.anyKeyDown)
+        if (acceptInputs == true)
         {
             SceneChanger sceneChanger = FindObjectOfType<SceneChanger>();
             if (sceneChanger != null)
             {
                 sceneChanger.ChangeScene("GameScene");
-                FindObjectOfType<SoundManager>().Play("MenuTap");
             }
+        }
+        
+    }
+
+    public void guideButtonPressed()
+    {
+        if (acceptInputs == true)
+        {
+            GuideMenu.SetActive(true);
         }
     }
 }
