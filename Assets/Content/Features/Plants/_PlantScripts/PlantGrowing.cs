@@ -85,12 +85,31 @@ public class PlantGrowing : MonoBehaviour
             {
                 ScoreManager.instance.currentCombo += 1;
                 ScoreManager.instance.AddToPluckCounter();
+
+                int ran = Random.Range(0, 2);
+
+                if (ran == 0)
+                {
+                    SoundManager.instance.Play("Harvest1");
+                }
+                else if (ran == 1)
+                {
+                    SoundManager.instance.Play("Harvest2");
+                }
             }
             else 
             {
                 ScoreManager.instance.currentCombo = 0;
+
+                if (currentStage == "Wilting")
+                {
+                    SoundManager.instance.Play("Wilted");
+                }
+                else if (currentStage == "Sprouting")
+                {
+                    //SoundManager.instance.Play("Sprouting");
+                }
             }
-            //play harvest animation
             currentStage = "Harvested";
             Invoke("RemovePlant", 0.1f);
         }

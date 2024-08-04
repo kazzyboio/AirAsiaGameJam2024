@@ -45,6 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - name: BGM
+    clip: {fileID: 8300000, guid: f72956450a900a640ba8279bddfc5011, type: 3}
+    mixer: {fileID: 0}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    priority: 100
+    source: {fileID: 0}
   - name: Whistle
     clip: {fileID: 8300000, guid: 707386e6b6cc0e54c8416dd0d56d5dc4, type: 3}
     mixer: {fileID: 0}
@@ -57,6 +65,46 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 45e25307e1aefb346b91ad3f54632dab, type: 3}
     mixer: {fileID: 0}
     volume: 0.3
+    pitch: 1
+    loop: 0
+    priority: 100
+    source: {fileID: 0}
+  - name: Harvest1
+    clip: {fileID: 8300000, guid: cdbd74bdc71a2bd4f9ed4022ad5c1581, type: 3}
+    mixer: {fileID: 0}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    priority: 100
+    source: {fileID: 0}
+  - name: Harvest2
+    clip: {fileID: 8300000, guid: 9d50cbeabbc4f754b91f0731c133a05a, type: 3}
+    mixer: {fileID: 0}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    priority: 100
+    source: {fileID: 0}
+  - name: Hehehe
+    clip: {fileID: 8300000, guid: f6ecaed25586c6f4d814659923a3ed96, type: 3}
+    mixer: {fileID: 0}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    priority: 100
+    source: {fileID: 0}
+  - name: Wilted
+    clip: {fileID: 8300000, guid: 5dc43450e1bc0dd47924934eb260c574, type: 3}
+    mixer: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    priority: 100
+    source: {fileID: 0}
+  - name: TimeGain
+    clip: {fileID: 8300000, guid: 762eda91a9ab0b04f910bed5fca2587c, type: 3}
+    mixer: {fileID: 0}
+    volume: 0.5
     pitch: 1
     loop: 0
     priority: 100
