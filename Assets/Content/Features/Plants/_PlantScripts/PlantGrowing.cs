@@ -96,7 +96,7 @@ public class PlantGrowing : MonoBehaviour
                 }
                 else if (currentStage == "Sprouting")
                 {
-                    //SoundManager.instance.Play("Sprouting");
+                    SoundManager.instance.Play("Sprouting");
                 }
             }
             currentStage = "Harvested";
