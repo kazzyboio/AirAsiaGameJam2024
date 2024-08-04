@@ -12,7 +12,6 @@ public class TappyAddTime : MonoBehaviour
     private Vector2 startTouchPosition;
     private Vector2 currentTouchPosition;
     private bool stopTouch = false, despawning = false;
-    private float swipeRange = 0.1f;
 
     public GameObject pluckedSprite;
     public float explosionForce = 12f;
@@ -55,10 +54,10 @@ public class TappyAddTime : MonoBehaviour
 
                 if (!stopTouch)
                 {
-
                     float normalizedDistance = distance.y / Screen.height;
 
-                    if (normalizedDistance > swipeRange)
+                    // Higher value for mobile input
+                    if (normalizedDistance > 250.0f)
                     {                    
                         Vector2 touchWorldPosition = Camera.main.ScreenToWorldPoint(startTouchPosition);
                         RaycastHit2D hit = Physics2D.Raycast(touchWorldPosition, Vector2.zero);
@@ -93,7 +92,10 @@ public class TappyAddTime : MonoBehaviour
 
             if (!stopTouch)
             {
-                if (distance.y > swipeRange)
+                float normalizedDistance = distance.y / Screen.height;
+
+                // Lower value for mouse input
+                if (normalizedDistance > 0.1f)
                 {
                     Vector2 mouseWorldPosition = Camera.main.ScreenToWorldPoint(startTouchPosition);
                     RaycastHit2D hit = Physics2D.Raycast(mouseWorldPosition, Vector2.zero);
